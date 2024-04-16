@@ -1,7 +1,7 @@
 <template>
     <div>
         <input type="text" placeholder="Cerca il tuo Film" v-model="store.query">
-        <button @click="getMovie(), getFilm(), getMovieImg()">Cerca</button>
+        <button @click="getMovie(), getFilm()">Cerca</button>
     </div>
     <div>
         <!-- <ul>
@@ -23,73 +23,67 @@
 </template>
 
 <script>
-    import "/node_modules/flag-icons/css/flag-icons.min.css"
-    import { store } from '../store.js'
-    import axios from 'axios'
-    export default {
-        data() {
-            return {
-                store,
-                // image: 
-            }
+import "/node_modules/flag-icons/css/flag-icons.min.css"
+import { store } from '../store.js'
+import axios from 'axios'
+export default {
+    data() {
+        return {
+            store,
+        }
+    },
+    methods: {
+        getMovie() {
+            axios.get('https://api.themoviedb.org/3/search/movie', {
+                params: {
+                    api_key: this.store.API_KEY,
+                    query: this.store.query
+
+                }
+            })
+                .then((res) => {
+                    console.log('movies', res.data.results)
+
+                    for (let i = 0; i < res.data.results.length; i++) {
+                        const result = res.data.results[i]
+                        this.store.movies.push(result)
+                    }
+
+                })
         },
-        methods: {
-            getMovie() {
-                axios.get('https://api.themoviedb.org/3/search/movie', {
-                    params: {
-                        api_key: this.store.API_KEY,
-                        query: this.store.query
+        getFilm() {
+            axios.get('https://api.themoviedb.org/3/search/tv', {
+                params: {
+                    api_key: this.store.API_KEY,
+                    query: this.store.query
 
-                    }
-                })
+                }
+            })
                 .then((res) => {
-                    console.log('movies',res.data.results)
+                    console.log('film', res.data.results)
 
-                    for(let i = 0; i < res.data.results.length; i++) {
-                        const results = res.data.results[i]
-                        const image = results.poster_path
-                        this.store.movies.push(results)
-                        this.store.moviesImage.push(image)
-                    }
-                    // console.log(this.store.moviesImage)
-                    // console.log(this.films)
-                    // console.log(this.films.title)
-
-                })
-            },
-            getFilm() {
-                axios.get('https://api.themoviedb.org/3/search/tv', {
-                    params: {
-                        api_key: this.store.API_KEY,
-                        query: this.store.query
-
-                    }
-                })
-                .then((res) => {
-                    console.log('film',res.data.results)
-
-                    for(let i = 0; i < res.data.results.length; i++) {
+                    for (let i = 0; i < res.data.results.length; i++) {
                         const results = res.data.results[i]
                         this.store.films.push(results)
                     }
                     // console.log(this.films)
                     // console.log(this.films.title)
 
-                }),
-            },
-            getMovieImg() {
-                axios.get('https://image.tmdb.org/t/p/')
-                .then((res) => {
-                    console.log(res)
-
                 })
-            }
-
         },
-        // mounted() {
-        //     console.log(this.getFilm())
-        // }
-    }
+        // getMovieImg() {
+        //     axios.get(`https://image.tmdb.org/t/p/${this.store.widthImg}`)
+        //         .then((res) => {
+        //             console.log(res)
+
+        //         })
+        // },
+
+    },
+    // mounted() {
+    //     console.log(this.getFilm())
+    // }
+}
 
 </script>
 
@@ -98,5 +92,4 @@
 //     background-size: contain;
 //     background-position: 50%;
 //     background-repeat: no-repeat;
-// }
-</style>
+// }</style>

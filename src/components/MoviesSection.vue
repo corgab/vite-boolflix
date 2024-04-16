@@ -8,6 +8,7 @@
                 <!-- {{ film.original_language }} -->
                 <span class="fi" :class="'fi-'+movie.original_language"></span>
                 {{ movie.vote_count }}
+                <img :src="`https://image.tmdb.org/t/p/${this.store.widthImg}${movie.poster_path}`" alt="">
             </li> 
         </ul>
     </div>

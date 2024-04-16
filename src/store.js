@@ -4,6 +4,5 @@ export const store = reactive({
     query: '',
     films: [],
     movies: [],
-    moviesImage: [],
-    widthImg: w154
+    widthImg: 'w154'
 })
