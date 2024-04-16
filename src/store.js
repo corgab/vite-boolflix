@@ -5,4 +5,5 @@ export const store = reactive({
     films: [],
     movies: [],
     moviesImage: [],
+    widthImg: w154
 })

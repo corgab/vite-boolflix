@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2>MOVIES</h2>
+        <h2>FILMS</h2>
         <ul>
             <li v-for="film in store.films">
                 {{ film.name }}
@@ -16,7 +16,11 @@
 <script>
     import { store } from '../store.js'
     export default {
-        
+        data() {
+            return {
+                store,
+            }
+        }
     }
 </script>
 

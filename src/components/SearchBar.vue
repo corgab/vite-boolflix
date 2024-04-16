@@ -1,7 +1,7 @@
 <template>
     <div>
         <input type="text" placeholder="Cerca il tuo Film" v-model="store.query">
-        <button @click="getMovie(), getFilm()">Cerca</button>
+        <button @click="getMovie(), getFilm(), getMovieImg()">Cerca</button>
     </div>
     <div>
         <!-- <ul>
@@ -43,7 +43,7 @@
                     }
                 })
                 .then((res) => {
-                    // console.log(res.data.results)
+                    console.log('movies',res.data.results)
 
                     for(let i = 0; i < res.data.results.length; i++) {
                         const results = res.data.results[i]
@@ -51,7 +51,7 @@
                         this.store.movies.push(results)
                         this.store.moviesImage.push(image)
                     }
-                    console.log(this.store.moviesImage)
+                    // console.log(this.store.moviesImage)
                     // console.log(this.films)
                     // console.log(this.films.title)
 
@@ -66,7 +66,7 @@
                     }
                 })
                 .then((res) => {
-                    console.log(res.data.results)
+                    console.log('film',res.data.results)
 
                     for(let i = 0; i < res.data.results.length; i++) {
                         const results = res.data.results[i]
@@ -75,8 +75,16 @@
                     // console.log(this.films)
                     // console.log(this.films.title)
 
+                }),
+            },
+            getMovieImg() {
+                axios.get('https://image.tmdb.org/t/p/')
+                .then((res) => {
+                    console.log(res)
+
                 })
             }
+
         },
         // mounted() {
         //     console.log(this.getFilm())
