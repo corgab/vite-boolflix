@@ -9,8 +9,8 @@
                         <h3>Titolo: {{ film.name }}</h3>
                         <h4>Titolo originale:{{ film.original_name }}</h4>
                         <div>
-                            <h4>Lingua: {{ film.original_language }} <span class="fi" :class="'fi-' + movie.original_language"></span></h4>
-                            <h4>Votazione: {{ convertVote(movie.vote_average) }} stelle</h4>
+                            <h4>Lingua: {{ film.original_language }} <span class="fi" :class="'fi-' + film.original_language"></span></h4>
+                            <h4>Votazione: {{ convertVote(film.vote_average) }} stelle</h4>
                         </div>
                     </div>
                 </div>

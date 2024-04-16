@@ -50,6 +50,7 @@ export default {
                         const results = res.data.results[i]
                         this.store.films.push(results)
                     }
+                    console.log(res.data.results)
 
                 })
         },
