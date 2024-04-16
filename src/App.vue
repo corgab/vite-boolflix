@@ -1,7 +1,11 @@
 <template>
-  <SearchBar/>
-  <MoviesSection/>
-  <FilmSection/>
+  <div class="bg-gray">
+    <div class="container">
+      <SearchBar/>
+      <MoviesSection/>
+      <FilmSection/>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -18,6 +22,15 @@
   }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+@use './assets/general.scss';
+
+.flex {
+  justify-content: space-between;
+}
+
+.bg-gray {
+  background-color: rgb(211, 211, 211);
+}
 
 </style>
