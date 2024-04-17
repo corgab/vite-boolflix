@@ -12,7 +12,7 @@
                             <h4>Lingua: {{ film.original_language }} <span class="fi"
                                     :class="'fi-' + film.original_language"></span></h4>
                             <h4>Votazione:
-                                <span v-for="star in convertVote(movie.vote_average)" class="star">
+                                <span v-for="star in convertVote(film.vote_average)" class="star">
                                     <font-awesome-icon icon="star" />
                                 </span>
                             </h4>
