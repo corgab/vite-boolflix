@@ -8,7 +8,9 @@
                     <div class="card-hover">
                         <h3>Titolo: {{ movie.title }}</h3>
                         <h4>Titolo originale: {{ movie.original_title }}</h4>
-                        <h4> {{ getGenreName(movie.genre_ids) }}</h4>
+                        <h4>Generi:  
+                            <p v-for="id in movie.genre_ids" :key="id"> {{ getGenreName(id) }}</p>
+                        </h4>
                         <div>
                             <h4>Lingua: {{ movie.original_language }}
                                 <span class="fi" :class="'fi-' + movie.original_language"></span>
@@ -60,11 +62,11 @@ export default {
                 return 5
             } else return fiveVote
         },
-        getGenreName(genreId) {
+        getGenreName(id) {
+            console.log(this.store.moviesGenres)
             for (let i = 0; i < this.store.moviesGenres.length; i++) {
-                console.log(this.store.moviesGenres[i])
-                // console.log(this.store.moviesGenres[i].id)
-                if (this.store.moviesGenres[i].id === genreId) {
+                console.log(this.store.moviesGenres[i].id)
+                if (this.store.moviesGenres[i].id === id) {
                     return this.store.moviesGenres[i].name
                 }
                 return "non conosco"
