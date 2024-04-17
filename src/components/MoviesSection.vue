@@ -8,11 +8,13 @@
                     <div class="card-hover">
                         <h3>Titolo: {{ movie.title }}</h3>
                         <h4>Titolo originale: {{ movie.original_title }}</h4>
+                        <h4> {{ getGenreName(movie.genre_ids) }}</h4>
                         <div>
-                            <h4>Lingua: {{ movie.original_language }} <span class="fi"
-                                    :class="'fi-' + movie.original_language"></span></h4>
+                            <h4>Lingua: {{ movie.original_language }}
+                                <span class="fi" :class="'fi-' + movie.original_language"></span>
+                            </h4>
                             <h4>Votazione:
-                                <span v-for="star in convertVote(movie.vote_average)" class="star">
+                                <span v-for="star in convertVote(movie.vote_average)" :key="star" class="star">
                                     <font-awesome-icon icon="star" />
                                 </span>
                             </h4>
@@ -57,6 +59,16 @@ export default {
             } else if (fiveVote > 5) {
                 return 5
             } else return fiveVote
+        },
+        getGenreName(genreId) {
+            for (let i = 0; i < this.store.moviesGenres.length; i++) {
+                console.log(this.store.moviesGenres[i])
+                // console.log(this.store.moviesGenres[i].id)
+                if (this.store.moviesGenres[i].id === genreId) {
+                    return this.store.moviesGenres[i].name
+                }
+                return "non conosco"
+            }
         }
     }
 }

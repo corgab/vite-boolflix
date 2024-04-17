@@ -3,7 +3,7 @@
         <img src="https://image.tmdb.org/t/p/w342/wwemzKWzjKYJFfCeiB57q3r4Bcm.png" alt="">
         <div>
             <input type="text" placeholder="Cerca il tuo Film" v-model="store.query">
-            <button @click="getMovie(), getFilm()">Cerca</button>
+            <button @click="getMovie(), getFilm(), getMovieGenres()">Cerca</button>
         </div>
     </div>
 </template>
@@ -50,10 +50,25 @@ export default {
                         const results = res.data.results[i]
                         this.store.films.push(results)
                     }
-                    console.log(res.data.results)
+                    // console.log(res.data.results)
 
                 })
         },
+        getMovieGenres() {
+            axios.get('https://api.themoviedb.org/3/genre/movie/list', {
+                params: {
+                    api_key: this.store.API_KEY,
+                }
+            })
+                .then((res) => {
+                    console.log(res.data)
+                    for(let i = 0; i < res.data.genres.length; i++) {
+                        this.store.moviesGenres.push(res.data.genres[i])
+                        console.log(res.data.genres[i])
+                    }
+                    console.log(this.store.moviesGenres)
+                })
+        }
     },
 }
 
@@ -63,5 +78,9 @@ export default {
 .flex {
     justify-content: space-between;
     align-items: center;
+    padding-top: 20px;
+}
+img {
+    width: 200px;
 }
 </style>
