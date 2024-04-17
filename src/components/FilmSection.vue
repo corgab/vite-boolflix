@@ -9,8 +9,14 @@
                         <h3>Titolo: {{ film.name }}</h3>
                         <h4>Titolo originale:{{ film.original_name }}</h4>
                         <div>
-                            <h4>Lingua: {{ film.original_language }} <span class="fi" :class="'fi-' + film.original_language"></span></h4>
-                            <h4>Votazione: {{ convertVote(film.vote_average) }} stelle</h4>
+                            <h4>Lingua: {{ film.original_language }} <span class="fi"
+                                    :class="'fi-' + film.original_language"></span></h4>
+                            <h4>Votazione:
+                                <span v-for="star in convertVote(movie.vote_average)" class="star">
+                                    <font-awesome-icon icon="star" />
+                                </span>
+                            </h4>
+
                         </div>
                     </div>
                 </div>
@@ -21,12 +27,21 @@
 </template>
 
 <script>
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faStar } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+library.add(faStar)
+
 import { store } from '../store.js'
 export default {
     data() {
         return {
             store,
         }
+    },
+    components: {
+        FontAwesomeIcon
     },
     methods: {
         //da mettere globale ma non so farlo
