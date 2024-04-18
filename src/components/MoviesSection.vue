@@ -65,13 +65,13 @@ export default {
         getGenreName(id) {
             console.log(this.store.moviesGenres)
             for (let i = 0; i < this.store.moviesGenres.length; i++) {
-                console.log(this.store.moviesGenres[i].id)
+                // console.log(this.store.moviesGenres[i].id)
                 if (this.store.moviesGenres[i].id === id) {
                     return this.store.moviesGenres[i].name
                 }
-                return "non conosco"
             }
-        }
+            return 'non conosco';
+        },
     }
 }
 </script>

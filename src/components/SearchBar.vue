@@ -3,7 +3,7 @@
         <img src="https://image.tmdb.org/t/p/w342/wwemzKWzjKYJFfCeiB57q3r4Bcm.png" alt="">
         <div>
             <input type="text" placeholder="Cerca il tuo Film" v-model="store.query">
-            <button @click="getMovie(), getFilm(), getMovieGenres()">Cerca</button>
+            <button @click="getMovie(), getFilm(), getMovieGenres(),getFilmGenres()">Cerca</button>
         </div>
     </div>
 </template>
@@ -67,6 +67,20 @@ export default {
                         console.log(res.data.genres[i])
                     }
                     console.log(this.store.moviesGenres)
+                })
+        },
+        getFilmGenres() {
+            axios.get('https://api.themoviedb.org/3/genre/tv/list', {
+                params: {
+                    api_key: this.store.API_KEY,
+                }
+            })
+                .then((res) => {
+                    for(let i = 0; i < res.data.genres.length; i++) {
+                        this.store.filmsGenres.push(res.data.genres[i])
+                        console.log(res.data.genres[i])
+                    }
+                    console.log(this.store.filmsGenres)
                 })
         }
     },
